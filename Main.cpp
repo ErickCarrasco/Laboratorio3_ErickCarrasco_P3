@@ -23,7 +23,7 @@ void play(char***, int);
 void playerlocation(char***, int);
 
 //Wave 
-void wave(char***, int, int);
+void wave(char***, int, int, int*);
 
 int main (){
 
@@ -74,6 +74,7 @@ int main (){
 				cout<<"Ingrese una coordenada en y (0-12)"<<endl;
 				cin>>y;
 				cout<<"Ingrese una coordenada en z (0-12)"<<endl;
+				cin>>z;				
 
 				if(x<0 || x>12 || y<0 || y>12 || z<0 || z>12){
 					cout<<"Out of bounds!"<<endl;
@@ -96,22 +97,71 @@ int main (){
 				cout<<"1/ XY"<<endl<<"2/ XZ"<<endl<<"3/ YZ";
 				int wave;
 				cin>>wave;
-				
+				wave(Matrix2, size, wave, hp2);
 			}
 			if(selec==3){
-
+				cout<<"Not available"<<endl;
 			}
 			if(selec>3){
 				cout<<"Pierde turno por no seguir instrucciones!"<<endl;
 			}
 			turn=2;
-		}
+		}//FIN TURNO 1
 		
 		if(turn==2){
 			cout<<endl;
 			cout<<"------- PLAYER 2 TURN ---------"<<endl;
 			playerlocation(Matrix2, size);
-		}
+
+			cout<<endl;
+			cout<<"Hostile u-boats: "<<hp1<<endl;
+
+			cout<<"1/ Normal Attack"<<endl;
+			cout<<"2/ Wave attack"<<endl;
+			cout<<"3/ Expansive"<<endl;
+			int selec;
+			cin>>selec;
+			if(selec==1){
+				int x;
+				int y;
+				int z;
+				cout<<"Ingrese una coordenada en x (0-12)"<<endl;
+				cin>>x;
+				cout<<"Ingrese una coordenada en y (0-12)"<<endl;
+				cin>>y;
+				cout<<"Ingrese una coordenada en z (0-12)"<<endl;
+
+				if(x<0 || x>12 || y<0 || y>12 || z<0 || z>12){
+					cout<<"Out of bounds!"<<endl;
+				}else{
+					if(Matrix1[x][y][z]=='#'){
+						cout<<"Overkill, but ammo was wasted"<<endl;
+					}
+					
+					if(Matrix1[x][y][z]=='U'){
+						cout<<"Direct Hit!"<<endl;
+						Matrix1[x][y][z]='#';
+						hp1=hp1-1;
+					}else{
+						cout<<"No hit"<<endl;
+					}
+				}
+				
+			}
+			if(selec==2){
+				cout<<"1/ XY"<<endl<<"2/ XZ"<<endl<<"3/ YZ";
+				int wave;
+				cin>>wave;
+				
+			}
+			if(selec==3){
+				cout<<"Not available"<<endl;
+			}
+			if(selec>3){
+				cout<<"Pierde turno por no seguir instrucciones!"<<endl;
+			}
+			turn=1;
+		}//Fin Turno 2
 		
 		if(hp1==0 || hp2==0){
 			val==0;
@@ -123,9 +173,88 @@ int main (){
 	return 0;
 }
 
-void wave(char*** matrix, int size, int type){
+void wave(char*** matrix, int size, int type, int* hp){
 	if(matrix!=NULL){
-				
+		if(type==1){
+			cout<< "Type XY"<<endl;	
+			int z;
+			cout<< "Ingrese un valor de Z:"<<endl;
+			cin>>z;
+			int validate=0;
+			while(validate==0){
+				if(z<0 || z>0){
+					cout<<"Error, ingrese de nuevo"<<endl;
+					cin>>z;
+				}else{
+					validate=1;
+				}
+			}
+			for(int i = 0; i<size; i++){
+				if(matrix[i][i][z]=='U'){
+					cout<<"Direct hit"<<endl;
+					matrix[i][i][z]='#';
+					hp= hp-1;
+				}else{
+					cout<<"Missed"<<endl;
+				}
+			}
+		}
+
+		if(type==2){
+			cout<< "Type XZ"<<endl;	
+			int y;
+			cout<< "Ingrese un valor de y:"<<endl;
+			cin>>y;
+			int validate=0;
+			while(validate==0){
+				if(y<0 || y>0){
+					cout<<"Error, ingrese de nuevo"<<endl;
+					cin>>y;
+				}else{
+					validate=1;
+				}
+			}
+			for(int i = 0; i<size; i++){
+				if(matrix[i][y][i]=='U'){
+					cout<<"Direct hit"<<endl;
+					matrix[i][y][i]='#';
+					hp= hp-1;
+				}else{
+					cout<<"Missed"<<endl;
+				}
+			}
+
+		}
+		
+		if(type == 3){
+			cout<< "Type YZ"<<endl;	
+			int x;
+			cout<< "Ingrese un valor de X:"<<endl;
+			cin>>x;
+			int validate=0;
+			while(validate==0){
+				if(x<0 || x>0){
+					cout<<"Error, ingrese de nuevo"<<endl;
+					cin>>x;
+				}else{
+					validate=1;
+				}
+			}
+			for(int i = 0; i<size; i++){
+				if(matrix[x][i][i]=='U'){
+					cout<<"Direct hit"<<endl;
+					matrix[x][i][i]='#';
+					hp= hp-1;
+				}else{
+					cout<<"Missed"<<endl;
+				}
+			}
+
+		}
+		
+		if(type>=4){
+			cout<<"Error"<<endl;
+		}			
 
 	}//Fin if
 }
