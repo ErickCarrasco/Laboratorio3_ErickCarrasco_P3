@@ -22,6 +22,9 @@ void play(char***, int);
 //U-Boat position
 void playerlocation(char***, int);
 
+//Wave 
+void wave(char***, int, int);
+
 int main (){
 
 	int size=12;
@@ -44,18 +47,63 @@ int main (){
 		cout<<"ACQUIRING DATA"<<endl;
 		cout<<"            BIENVENIDO AL BATTLESHIP" <<endl;
 		//Inicializar Random
-		srand(time(NULL));
-		uBoats(Matrix1, size);
-		uBoats(Matrix2, size);
+
+		//srand(time(NULL));
+		//uBoats(Matrix1, size);
+		//uBoats(Matrix2, size);
+
 		int turn=1;
 		if(turn==1){
 			cout<<endl;
 			cout<<"------- PLAYER 1 TURN --------"<<endl;
 			playerlocation(Matrix1, size);
+			cout<<endl;
+			cout<<"Hostile u-boats: "<<hp2<<endl;
+
 			cout<<"1/ Normal Attack"<<endl;
 			cout<<"2/ Wave attack"<<endl;
 			cout<<"3/ Expansive"<<endl;
 			int selec;
+			cin>>selec;
+			if(selec==1){
+				int x;
+				int y;
+				int z;
+				cout<<"Ingrese una coordenada en x (0-12)"<<endl;
+				cin>>x;
+				cout<<"Ingrese una coordenada en y (0-12)"<<endl;
+				cin>>y;
+				cout<<"Ingrese una coordenada en z (0-12)"<<endl;
+
+				if(x<0 || x>12 || y<0 || y>12 || z<0 || z>12){
+					cout<<"Out of bounds!"<<endl;
+				}else{
+					if(Matrix2[x][y][z]=='#'){
+						cout<<"Overkill, but ammo was wasted"<<endl;
+					}
+					
+					if(Matrix2[x][y][z]=='U'){
+						cout<<"Direct Hit!"<<endl;
+						Matrix2[x][y][z]='#';
+						hp2=hp2-1;
+					}else{
+						cout<<"No hit"<<endl;
+					}
+				}
+				
+			}
+			if(selec==2){
+				cout<<"1/ XY"<<endl<<"2/ XZ"<<endl<<"3/ YZ";
+				int wave;
+				cin>>wave;
+				
+			}
+			if(selec==3){
+
+			}
+			if(selec>3){
+				cout<<"Pierde turno por no seguir instrucciones!"<<endl;
+			}
 			turn=2;
 		}
 		
@@ -73,6 +121,13 @@ int main (){
 	liberarMatrix(Matrix1, size);
 	liberarMatrix(Matrix2, size);
 	return 0;
+}
+
+void wave(char*** matrix, int size, int type){
+	if(matrix!=NULL){
+				
+
+	}//Fin if
 }
 
 void playerlocation(char*** matrix, int size){
