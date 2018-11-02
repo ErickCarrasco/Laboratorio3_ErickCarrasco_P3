@@ -23,7 +23,7 @@ void play(char***, int);
 void playerlocation(char***, int);
 
 //Wave 
-void wave(char***, int, int, int*);
+int waveValue(char***, int, int, int);
 
 int main (){
 
@@ -95,9 +95,9 @@ int main (){
 			}
 			if(selec==2){
 				cout<<"1/ XY"<<endl<<"2/ XZ"<<endl<<"3/ YZ";
-				int wave;
-				cin>>wave;
-				wave(Matrix2, size, wave, hp2);
+				int wave1;
+				cin>>wave1;
+				hp2 = waveValue(Matrix2, size, wave1, hp2);
 			}
 			if(selec==3){
 				cout<<"Not available"<<endl;
@@ -150,9 +150,9 @@ int main (){
 			}
 			if(selec==2){
 				cout<<"1/ XY"<<endl<<"2/ XZ"<<endl<<"3/ YZ";
-				int wave;
-				cin>>wave;
-				wave(Matrix2, size, wave, hp2);
+				int wave1;
+				cin>>wave1;
+				hp1 = waveValue(Matrix2, size, wave1, hp1);
 				
 			}
 			if(selec==3){
@@ -174,7 +174,7 @@ int main (){
 	return 0;
 }
 
-void wave(char*** matrix, int size, int type, int* hp){
+int waveValue(char*** matrix, int size, int type, int hp){
 	if(matrix!=NULL){
 		if(type==1){
 			cout<< "Type XY"<<endl;	
@@ -258,6 +258,8 @@ void wave(char*** matrix, int size, int type, int* hp){
 		}			
 
 	}//Fin if
+
+	return hp;
 }
 
 void playerlocation(char*** matrix, int size){
