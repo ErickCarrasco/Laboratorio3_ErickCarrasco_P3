@@ -152,6 +152,7 @@ int main (){
 				cout<<"1/ XY"<<endl<<"2/ XZ"<<endl<<"3/ YZ";
 				int wave;
 				cin>>wave;
+				wave(Matrix2, size, wave, hp2);
 				
 			}
 			if(selec==3){
