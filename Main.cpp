@@ -183,7 +183,7 @@ int waveValue(char*** matrix, int size, int type, int hp){
 			cin>>z;
 			int validate=0;
 			while(validate==0){
-				if(z<0 || z>0){
+				if(z<0 || z>12){
 					cout<<"Error, ingrese de nuevo"<<endl;
 					cin>>z;
 				}else{
@@ -208,7 +208,7 @@ int waveValue(char*** matrix, int size, int type, int hp){
 			cin>>y;
 			int validate=0;
 			while(validate==0){
-				if(y<0 || y>0){
+				if(y<0 || y>12){
 					cout<<"Error, ingrese de nuevo"<<endl;
 					cin>>y;
 				}else{
@@ -234,7 +234,7 @@ int waveValue(char*** matrix, int size, int type, int hp){
 			cin>>x;
 			int validate=0;
 			while(validate==0){
-				if(x<0 || x>0){
+				if(x<0 || x>12){
 					cout<<"Error, ingrese de nuevo"<<endl;
 					cin>>x;
 				}else{
